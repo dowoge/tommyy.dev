@@ -1,21 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tommy's website</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>tommyy.dev lol GPT 5.2 Codex</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #0b0b12;
+			--bg-soft: rgba(20, 20, 33, 0.85);
+			--fg: #f7f7ff;
+			--muted: rgba(247, 247, 255, 0.65);
+			--accent: #7f5bff;
+			--accent-2: #35f0c2;
+			--accent-3: #ff8bf2;
+			--card: rgba(24, 24, 40, 0.88);
+			--border: rgba(255, 255, 255, 0.08);
+			--glow: 0 0 40px rgba(127, 91, 255, 0.25), 0 0 90px rgba(53, 240, 194, 0.25);
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+			color: var(--fg);
+			background: radial-gradient(circle at top, rgba(127, 91, 255, 0.25), transparent 45%),
+				radial-gradient(circle at 20% 40%, rgba(53, 240, 194, 0.2), transparent 40%),
+				radial-gradient(circle at 80% 20%, rgba(255, 139, 242, 0.2), transparent 40%),
+				linear-gradient(120deg, #050509, #0b0b12 30%, #080810 70%, #050509);
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			top: -30%;
+			left: -30%;
+			width: 160%;
+			height: 160%;
+			background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+			background-size: 28px 28px;
+			pointer-events: none;
+			opacity: 0.45;
+			z-index: 0;
+		}
+
+		main {
+			position: relative;
+			z-index: 1;
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 48px 24px 80px;
+			display: grid;
+			gap: 36px;
+		}
+
+		nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 16px;
+		}
+
+		.logo {
+			font-family: "JetBrains Mono", monospace;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+
+		.status-chip {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 16px;
+			border-radius: 999px;
+			border: 1px solid var(--border);
+			background: rgba(255, 255, 255, 0.05);
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+
+		.status-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: var(--accent-2);
+			box-shadow: 0 0 12px rgba(53, 240, 194, 0.9);
+		}
+
+		.hero {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 28px;
+			align-items: center;
+		}
+
+		.hero-card {
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: 28px;
+			padding: 32px;
+			box-shadow: var(--glow);
+			backdrop-filter: blur(18px);
+		}
+
+		.hero h1 {
+			font-size: clamp(2.5rem, 5vw, 4.2rem);
+			line-height: 1.05;
+			margin-bottom: 12px;
+		}
+
+		.hero p {
+			color: var(--muted);
+			font-size: 1.05rem;
+			line-height: 1.6;
+		}
+
+		.hero-highlight {
+			color: var(--fg);
+			font-weight: 600;
+		}
+
+		.cta-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 14px;
+			margin-top: 28px;
+		}
+
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 12px 20px;
+			border-radius: 14px;
+			border: 1px solid transparent;
+			text-decoration: none;
+			color: var(--fg);
+			background: linear-gradient(135deg, rgba(127, 91, 255, 0.95), rgba(53, 240, 194, 0.95));
+			box-shadow: 0 10px 30px rgba(127, 91, 255, 0.4);
+			font-weight: 600;
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+		}
+
+		.btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 16px 40px rgba(127, 91, 255, 0.5);
+		}
+
+		.btn-secondary {
+			background: transparent;
+			border: 1px solid var(--border);
+			color: var(--fg);
+			box-shadow: none;
+		}
+
+		.btn-secondary:hover {
+			transform: translateY(-2px);
+			border-color: rgba(255, 255, 255, 0.25);
+		}
+
+		.hero-grid {
+			display: grid;
+			gap: 16px;
+		}
+
+		.badge {
+			padding: 10px 14px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.06);
+			border: 1px solid var(--border);
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+
+		.info-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 18px;
+		}
+
+		.info-card {
+			background: var(--bg-soft);
+			border: 1px solid var(--border);
+			border-radius: 20px;
+			padding: 18px;
+			backdrop-filter: blur(10px);
+			transition: transform 0.2s ease, border-color 0.2s ease;
+		}
+
+		.info-card:hover {
+			transform: translateY(-4px);
+			border-color: rgba(127, 91, 255, 0.45);
+		}
+
+		.info-card h3 {
+			font-size: 1rem;
+			margin-bottom: 6px;
+		}
+
+		.info-card p {
+			color: var(--muted);
+			font-size: 0.95rem;
+			line-height: 1.5;
+		}
+
+		.links {
+			display: grid;
+			gap: 14px;
+		}
+
+		.link-pill {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 14px 18px;
+			border-radius: 16px;
+			border: 1px solid var(--border);
+			text-decoration: none;
+			color: var(--fg);
+			background: rgba(255, 255, 255, 0.03);
+			transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+		}
+
+		.link-pill:hover {
+			transform: translateY(-3px);
+			border-color: rgba(53, 240, 194, 0.6);
+			background: rgba(53, 240, 194, 0.08);
+		}
+
+		.link-label {
+			font-weight: 600;
+		}
+
+		.link-meta {
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+
+		footer {
+			margin-top: 24px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 12px;
+			color: var(--muted);
+			font-size: 0.9rem;
+		}
+
+		.footer-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			justify-content: center;
+		}
+
+		.footer-links a {
+			color: var(--fg);
+			text-decoration: none;
+			padding: 6px 10px;
+			border-radius: 999px;
+			border: 1px solid var(--border);
+			background: rgba(255, 255, 255, 0.04);
+			transition: border-color 0.2s ease, transform 0.2s ease;
+		}
+
+		.footer-links a:hover {
+			border-color: rgba(255, 255, 255, 0.3);
+			transform: translateY(-2px);
+		}
+
+		.orbit {
+			position: relative;
+			width: min(360px, 80vw);
+			aspect-ratio: 1 / 1;
+			margin: 0 auto;
+		}
+
+		.orbit::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 68%;
+			height: 68%;
+			border-radius: 50%;
+			border: 1px dashed rgba(255, 255, 255, 0.15);
+			transform: translate(-50%, -50%);
+		}
+
+		.orbit::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 40%;
+			height: 40%;
+			border-radius: 50%;
+			border: 1px dashed rgba(255, 255, 255, 0.15);
+			transform: translate(-50%, -50%);
+		}
+
+		.orbit-core {
+			position: absolute;
+			inset: 32%;
+			border-radius: 50%;
+			background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(127, 91, 255, 0.2));
+			box-shadow: 0 0 35px rgba(127, 91, 255, 0.6);
+		}
+
+		.orbit-node {
+			position: absolute;
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			background: var(--accent-2);
+			box-shadow: 0 0 12px rgba(53, 240, 194, 0.7);
+		}
+
+		.orbit-node:nth-child(1) {
+			top: 10%;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		.orbit-node:nth-child(2) {
+			top: 50%;
+			left: 8%;
+			transform: translateY(-50%);
+			background: var(--accent-3);
+			box-shadow: 0 0 12px rgba(255, 139, 242, 0.7);
+		}
+
+		.orbit-node:nth-child(3) {
+			bottom: 12%;
+			right: 16%;
+			background: var(--accent);
+			box-shadow: 0 0 12px rgba(127, 91, 255, 0.7);
+		}
+
+		@media (max-width: 720px) {
+			.status-chip {
+				display: none;
+			}
+		}
+	</style>
 </head>
 <body>
-	hello this is my website
-	<br>
-	<a href="https://git.tommyy.dev/" target="_blank">self hosted git</a>
+	<main>
+		<nav>
+			<div class="logo">tommyy.dev</div>
+			<div class="status-chip">
+				<span class="status-dot"></span>
+				<span>online • building things</span>
+			</div>
+		</nav>
 
-	<footer>
-		<p>
-			Discord username: @__tommyy<br>
-			Discord server: <a href="https://discord.com/invite/nbexAXp" target="_blank">discord.gg/nbexAXp</a><br>
-			Roblox profile: <a href="https://www.roblox.com/users/1455906620/profile" target="_blank">@slowsilver06</a>
-		</p>
-	</footer>
+		<section class="hero">
+			<div class="hero-card">
+				<h1>hello, i'm tommy.</h1>
+				<p>
+					I run a <span class="hero-highlight">self-hosted lab</span> where I ship experiments, play with
+					infrastructure, and make tiny internet corners feel alive.
+				</p>
+				<div class="cta-row">
+					<a class="btn" href="https://git.tommyy.dev/" target="_blank" rel="noreferrer">visit my git</a>
+					<a class="btn btn-secondary" href="https://discord.com/invite/nbexAXp" target="_blank" rel="noreferrer">join discord</a>
+				</div>
+				<div class="hero-grid" style="margin-top: 24px;">
+					<span class="badge">discord: @__tommyy</span>
+					<span class="badge">roblox: @slowsilver06</span>
+				</div>
+			</div>
+			<div class="hero-card" aria-hidden="true">
+				<div class="orbit">
+					<div class="orbit-core"></div>
+					<div class="orbit-node"></div>
+					<div class="orbit-node"></div>
+					<div class="orbit-node"></div>
+				</div>
+				<p style="text-align: center; margin-top: 20px; color: var(--muted);">
+					current focus: self-hosted tools • community • creative builds
+				</p>
+			</div>
+		</section>
+
+		<section class="info-grid">
+			<div class="info-card">
+				<h3>self-hosted git</h3>
+				<p>peek at the lab where projects get pushed, pulled, and launched.</p>
+			</div>
+			<div class="info-card">
+				<h3>community</h3>
+				<p>drop by the discord to hang out, share builds, or just say hi.</p>
+			</div>
+			<div class="info-card">
+				<h3>playground</h3>
+				<p>i like making small, weird, beautiful things on the internet.</p>
+			</div>
+		</section>
+
+		<section class="links">
+			<a class="link-pill" href="https://git.tommyy.dev/" target="_blank" rel="noreferrer">
+				<span class="link-label">self hosted git</span>
+				<span class="link-meta">git.tommyy.dev →</span>
+			</a>
+			<a class="link-pill" href="https://discord.com/invite/nbexAXp" target="_blank" rel="noreferrer">
+				<span class="link-label">discord server</span>
+				<span class="link-meta">discord.gg/nbexAXp →</span>
+			</a>
+			<a class="link-pill" href="https://www.roblox.com/users/1455906620/profile" target="_blank" rel="noreferrer">
+				<span class="link-label">roblox profile</span>
+				<span class="link-meta">@slowsilver06 →</span>
+			</a>
+		</section>
+
+		<footer>
+			<span>made in feb 2026 • tommyy.dev</span>
+			<div class="footer-links">
+				<a href="https://git.tommyy.dev/" target="_blank" rel="noreferrer">git</a>
+				<a href="https://discord.com/invite/nbexAXp" target="_blank" rel="noreferrer">discord</a>
+				<a href="https://www.roblox.com/users/1455906620/profile" target="_blank" rel="noreferrer">roblox</a>
+			</div>
+		</footer>
+	</main>
 </body>
 </html>
