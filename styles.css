@@ -1,0 +1,124 @@
+:root {
+    --bg: #0d0f14;
+    --fg: #f4f5f7;
+    --muted: #a7acb6;
+    --border: #222633;
+    --accent: #6aa0ff;
+    --card: #141824;
+}
+
+[data-theme="light"] {
+    --bg: #fafafa;
+    --fg: #0f1115;
+    --muted: #5b5f6b;
+    --border: #e8e8ee;
+    --accent: #2f6bff;
+    --card: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.6;
+}
+
+main {
+    max-width: 720px;
+    margin: 64px auto 80px;
+    padding: 0 20px;
+    display: grid;
+    gap: 28px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+.theme-toggle {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--fg);
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.logo {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+.links {
+    display: grid;
+    gap: 10px;
+}
+
+.link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--fg);
+    background: var(--card);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.link:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.link span {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.footer {
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.9rem;
+    display: grid;
+    gap: 8px;
+}
+
+.footer a {
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.footer a:hover {
+    border-bottom-color: var(--fg);
+}
