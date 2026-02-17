@@ -4,42 +4,68 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="styles.css">
+	<link rel="icon" href="favicon.ico">
 	<title>tommyy.dev</title>
 </head>
 <body>
-	<main>
-		<nav>
-			<div class="logo">tommyy.dev</div>
-			<button class="theme-toggle" type="button" aria-pressed="false">light mode</button>
-		</nav>
+	<div class="video-bg">
+		<video autoplay muted loop playsinline id="bg-video">
+			<source src="media/bg.av1.mp4" type="video/mp4; codecs=av01.0.04M.08">
+			<source src="media/bg.mp4" type="video/mp4">
+		</video>
+		<div class="overlay"></div>
+	</div>
 
-		<section class="hero">
-			<h1>hello, i'm tommy</h1>
-			<p>
-				Self-host enthusiast, I like Lua and making stuff on Roblox sometimes
-			</p>
-		</section>
+	<audio id="bg-audio" loop>
+		<source src="media/song.mp3" type="audio/mpeg">
+	</audio>
 
-		<section class="links">
-			<a class="link" href="https://github.com/dowoge" target="_blank" rel="noreferrer">
-				<strong>github</strong>
-				<span>@dowoge</span>
-			</a>
-			<a class="link" href="https://discord.com/invite/nbexAXp" target="_blank" rel="noreferrer">
-				<strong>discord server</strong>
-				<span>discord.gg/nbexAXp</span>
-			</a>
-			<a class="link" href="https://www.roblox.com/users/1455906620/profile" target="_blank" rel="noreferrer">
-				<strong>roblox profile</strong>
-				<span id="roblox-username" data-roblox-id="1455906620">loading...</span>
-			</a>
-		</section>
+	<div class="enter-screen" id="enter-screen">
+		<div class="enter-content">
+			<div class="enter-logo glitch" data-text="tommyy.dev">tommyy.dev</div>
+			<button class="enter-btn" id="enter-btn">[ CLICK TO ENTER ]</button>
+		</div>
+		<div class="scanlines"></div>
+	</div>
 
-		<section class="footer">
-			<div>discord: @__tommyy</div>
-			<div>made feb 2026</div>
-		</section>
-	</main>
+	<div class="main-wrapper" id="main-wrapper">
+		<div class="scanlines"></div>
+		<main>
+			<div class="name glitch" data-text="tommyy">tommyy</div>
+			<div class="tagline">self-host enthusiast & lua developer</div>
+
+			<div class="links">
+				<a href="https://github.com/dowoge" target="_blank" rel="noreferrer">
+					<img src="icons/github.svg" alt="GitHub" class="link-icon">
+					<span>github</span>
+				</a>
+				<a href="https://discord.com/invite/nbexAXp" target="_blank" rel="noreferrer">
+					<img src="icons/discord.svg" alt="Discord" class="link-icon">
+					<span>discord</span>
+				</a>
+				<a href="https://www.roblox.com/users/1455906620/profile" target="_blank" rel="noreferrer">
+					<img src="icons/roblox.svg" alt="Roblox" class="link-icon">
+					<span>roblox</span>
+				</a>
+			</div>
+
+			<div class="discord-tag">@__tommyy</div>
+
+			<button class="audio-toggle" id="audio-toggle" title="Toggle Music">
+				<svg class="icon-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+					<path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+					<path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+				</svg>
+				<svg class="icon-mute hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+					<line x1="23" y1="9" x2="17" y2="15"></line>
+					<line x1="17" y1="9" x2="23" y2="15"></line>
+				</svg>
+			</button>
+		</main>
+	</div>
+
 	<script src="script.js"></script>
 </body>
 </html>

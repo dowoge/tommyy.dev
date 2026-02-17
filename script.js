@@ -1,42 +1,51 @@
-const root = document.documentElement;
-const toggle = document.querySelector(".theme-toggle");
-const storedTheme = localStorage.getItem("theme");
-const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+const enterScreen = document.getElementById('enter-screen');
+const enterBtn = document.getElementById('enter-btn');
+const mainWrapper = document.getElementById('main-wrapper');
+const audio = document.getElementById('bg-audio');
+const audioToggle = document.getElementById('audio-toggle');
+const iconVolume = audioToggle.querySelector('.icon-volume');
+const iconMute = audioToggle.querySelector('.icon-mute');
+const video = document.getElementById('bg-video');
 
-const setTheme = (mode) => {
-	if (mode === "light") {
-		root.setAttribute("data-theme", "light");
-		toggle.textContent = "dark mode";
-		toggle.setAttribute("aria-pressed", "true");
-	} else {
-		root.removeAttribute("data-theme");
-		toggle.textContent = "light mode";
-		toggle.setAttribute("aria-pressed", "false");
+let audioPlaying = false;
+
+function enterSite() {
+	enterScreen.classList.add('hidden');
+	mainWrapper.classList.add('visible');
+
+	audio.volume = 0.35;
+	audio.play().then(() => {
+		audioPlaying = true;
+		audioToggle.classList.add('playing');
+		iconVolume.classList.remove('hidden');
+		iconMute.classList.add('hidden');
+	}).catch(() => {
+		audioPlaying = false;
+		audioToggle.classList.remove('playing');
+		iconVolume.classList.add('hidden');
+		iconMute.classList.remove('hidden');
+	});
+
+	if (video.paused) {
+		video.play().catch(() => {});
 	}
-};
-
-setTheme(storedTheme ?? (prefersLight ? "light" : "dark"));
-
-toggle.addEventListener("click", () => {
-	const isLight = root.getAttribute("data-theme") === "light";
-	const next = isLight ? "dark" : "light";
-	setTheme(next);
-	localStorage.setItem("theme", next);
-});
-
-const robloxElement = document.getElementById("roblox-username");
-const robloxId = robloxElement?.dataset.robloxId;
-if (robloxElement && robloxId) {
-	fetch(`https://users.roproxy.com/v1/users/${robloxId}`)
-		.then((response) => (response.ok ? response.json() : null))
-		.then((data) => {
-			if (data?.name) {
-				robloxElement.textContent = `${data.displayName} (@${data.name})`;
-			} else {
-				robloxElement.textContent = "roblox.com";
-			}
-		})
-		.catch(() => {
-			robloxElement.textContent = "roblox.com";
-		});
 }
+
+enterBtn.addEventListener('click', enterSite);
+
+audioToggle.addEventListener('click', () => {
+	if (audioPlaying) {
+		audio.pause();
+		audioPlaying = false;
+		audioToggle.classList.remove('playing');
+		iconVolume.classList.add('hidden');
+		iconMute.classList.remove('hidden');
+	} else {
+		audio.play().then(() => {
+			audioPlaying = true;
+			audioToggle.classList.add('playing');
+			iconVolume.classList.remove('hidden');
+			iconMute.classList.add('hidden');
+		}).catch(() => {});
+	}
+});
